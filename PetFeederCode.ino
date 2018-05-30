@@ -1,9 +1,13 @@
+bool autofeed = false;
+int autofeed_pin = 5;
+
 void setup() {
-  // put your setup code here, to run once:
-  int a = 4;  
+  
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  
+  // check boolean logic on pin for autofeed
+  if (autofeed == true) {
+    //check user input
+  }
 }
