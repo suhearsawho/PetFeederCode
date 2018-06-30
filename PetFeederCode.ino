@@ -3,13 +3,17 @@
 #include <IRremoteInt.h>
 #include <ir_Lego_PF_BitStreamEncoder.h>
 #include <SoftwareSerial.h>
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(12, 10, 5, 4, 3, 2);
 
 const int NUM_FEEDINGS = 2;
-int initialTime;
-int* feedTimes;
+String initialTime;
+String* feedTimes;
 
 void setup() {
     Serial.begin(9600);
+    lcd.begin(16,2);
     setupRemote();
     initialTime = getInitialTime();
     feedTimes = getFeedTimes();

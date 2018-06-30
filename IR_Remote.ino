@@ -44,3 +44,29 @@ String readRemoteButton() {
     return input; 
 }
 
+String convertButtonValue(String buttonHEX) {
+    if (buttonHEX == REMOTE_0) {
+        return "0";
+    } else if (buttonHEX == REMOTE_1) {
+        return "1";
+    } else if (buttonHEX == REMOTE_2) {
+        return "2";
+    } else if (buttonHEX == REMOTE_3) {
+        return "3";
+    } else if (buttonHEX == REMOTE_4) {
+        return "4";
+    } else if (buttonHEX == REMOTE_5) {
+        return "5";
+    } else if (buttonHEX == REMOTE_6) {
+        return "6";
+    } else if (buttonHEX == REMOTE_7) {
+        return "7";
+    } else if (buttonHEX == REMOTE_8) {
+        return "8";
+    } else if (buttonHEX == REMOTE_9) {
+        return "9";
+    } else {
+        return buttonHEX;
+    }
+}
+
