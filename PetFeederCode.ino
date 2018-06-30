@@ -1,13 +1,21 @@
-bool autofeed = false;
-int autofeed_pin = 5;
+#include <boarddefs.h>
+#include <IRremote.h>
+#include <IRremoteInt.h>
+#include <ir_Lego_PF_BitStreamEncoder.h>
+
+const int NUM_FEEDINGS = 2;
+int initialTime;
+int* feedTimes;
 
 void setup() {
-  
+  initialTime = getInitialTime();
+  feedTimes = getFeedTimes();
 }
 
 void loop() {
-  // check boolean logic on pin for autofeed
-  if (autofeed == true) {
-    //check user input
+  for (int i = 0; i < NUM_FEEDINGS; i++) {
+    if (*(feedTimes + i) == getCurrentTime()) {
+      feedFood();
+    }
   }
 }
