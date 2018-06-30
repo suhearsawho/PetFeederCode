@@ -1,7 +1,7 @@
 int * getFeedTimes() {
     static int feedTimes[NUM_FEEDINGS];
     for (int i = 0; i < NUM_FEEDINGS; i++) {
-      feedTimes[i] = 0;
+        feedTimes[i] = 0;
     }
     return feedTimes;
 }
