@@ -8,8 +8,9 @@
 LiquidCrystal lcd(12, 10, 5, 4, 3, 2);
 
 const int NUM_FEEDINGS = 2;
+const int DISPLAY_DELAY = 3000;
 String initialTime;
-String* feedTimes;
+String * feedTimes;
 
 void setup() {
     Serial.begin(9600);

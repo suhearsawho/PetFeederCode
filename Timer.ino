@@ -1,7 +1,14 @@
 String * getFeedTimes() {
     static String feedTimes[NUM_FEEDINGS];
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Feeding Time ");
     for (int i = 0; i < NUM_FEEDINGS; i++) {
-        feedTimes[i] = "0";
+        lcd.setCursor(14,0);
+        lcd.print(String(i+1));
+        feedTimes[i] = getTime();
+        lcd.setCursor(0,1);
+        lcd.print(feedTimes[i]);
     }
     return feedTimes;
 }
@@ -9,29 +16,38 @@ String * getFeedTimes() {
 
 // user enters initial time to IR remote. time must be in 4 digit format. 
 String getInitialTime() {  
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Current Time?");
-    String initialTime;
+    bool verifyTime;
+    do {
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Current Time?");
+        
+        String initialTime = getTime();
+        
+        lcd.setCursor(0,1);
+        lcd.print(initialTime);
+        delay(DISPLAY_DELAY);
+        
+        verifyTime = isValidTime(initialTime);
+    } while (!verifyTime);
+    return initialTime;
+}
+
+
+String getTime() {
+    String inputTime;
     for (int i = 0; i < 4; i++) {
         String inputDigit = convertButtonValue(readRemoteButton());
-        // Holding a button sends REMOTE_REPEAT code.
-        // Ignore these and only accept valid digits between 0 from 9.
-        if (inputDigit == REMOTE_REPEAT) {
-            i--;
-            continue;
-        }
 
         // Insert ":" between HH and MM
         if (i == 2) {
-            initialTime += ":";
+            inputTime += ":";
         }
-        initialTime += inputDigit;
+        inputTime += inputDigit;
     }
-    lcd.setCursor(0,1);
-    lcd.print(initialTime);
-    return initialTime;
+    return inputTime;
 }
+
 
 String getCurrentTime() {
     return "0";
