@@ -8,7 +8,7 @@
 LiquidCrystal lcd(12, 10, 5, 4, 3, 2);
 
 const int NUM_FEEDINGS = 2;
-const int DISPLAY_DELAY = 3000;
+const int DISPLAY_DELAY = 2000;
 String initialTime;
 String * feedTimes;
 
@@ -18,6 +18,7 @@ void setup() {
     setupRemote();
     initialTime = getInitialTime();
     feedTimes = getFeedTimes();
+    verifyFeedTimes(feedTimes);
 }
 
 void loop() {

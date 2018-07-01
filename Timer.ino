@@ -1,14 +1,34 @@
+String getTime() {
+    String inputTime;
+    for (int i = 0; i < 4; i++) {
+        String inputDigit = convertButtonValue(readRemoteButton());
+
+        // Insert ":" between HH and MM
+        if (i == 2) {
+            inputTime += ":";
+        }
+        inputTime += inputDigit;
+    }
+    return inputTime;
+}
+
+
 String * getFeedTimes() {
     static String feedTimes[NUM_FEEDINGS];
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Feeding Time ");
     for (int i = 0; i < NUM_FEEDINGS; i++) {
-        lcd.setCursor(14,0);
-        lcd.print(String(i+1));
-        feedTimes[i] = getTime();
-        lcd.setCursor(0,1);
-        lcd.print(feedTimes[i]);
+        bool verifyTime;
+        do {
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Feeding Time ");
+            lcd.setCursor(14,0);
+            lcd.print(String(i+1));
+            feedTimes[i] = getTime();
+            lcd.setCursor(0,1);
+            lcd.print(feedTimes[i]);
+            delay(DISPLAY_DELAY);
+            verifyTime = isValidTime(feedTimes[i]);
+        } while (!verifyTime);
     }
     return feedTimes;
 }
@@ -33,21 +53,16 @@ String getInitialTime() {
     return initialTime;
 }
 
-
-String getTime() {
-    String inputTime;
-    for (int i = 0; i < 4; i++) {
-        String inputDigit = convertButtonValue(readRemoteButton());
-
-        // Insert ":" between HH and MM
-        if (i == 2) {
-            inputTime += ":";
-        }
-        inputTime += inputDigit;
+void verifyFeedTimes(String * feedTimes) {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Feed Times at:");
+    for (int i = 0; i < NUM_FEEDINGS; i++) {
+        lcd.setCursor(i*6,1);
+        lcd.print(feedTimes[i]);
     }
-    return inputTime;
+    delay(DISPLAY_DELAY);
 }
-
 
 String getCurrentTime() {
     return "0";
