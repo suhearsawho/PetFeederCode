@@ -76,14 +76,18 @@ String getCurrentTime() {
     time_t t = now();
     String hourCurrentTime = String(hour(t));
     String minuteCurrentTime = String(minute(t));
+    
     int lengthMinute = minuteCurrentTime.length();
     if (lengthMinute < 2) {
         minuteCurrentTime = "0" + minuteCurrentTime;
     }
+    int lengthHour = hourCurrentTime.length();
+    if (lengthHour < 2) {
+        hourCurrentTime = "0" + hourCurrentTime;
+    }
+    
     String currentTime = hourCurrentTime + ":" + minuteCurrentTime;
     return currentTime;
 }
 
-String resetNewDay() {
-}
 

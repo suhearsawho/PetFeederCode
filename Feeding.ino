@@ -2,7 +2,7 @@ Servo feedServo;
 
 const int feedServoOpen = 45; 
 const int feedServoClose = 0;
-const int feedingIntervalLength = 10000; //amount of time that food takes to clear from machine.
+const int feedingIntervalLength = 40000; //amount of time that food takes to clear from machine.
 
 
 void feedFood(int feedingNumber){
@@ -14,11 +14,9 @@ void feedFood(int feedingNumber){
 }
 
 
-bool * feedCheckSetup(){
-    static bool feedCheck[NUM_FEEDINGS];
+void feedCheckSetup(){
     for (int i = 0; i < NUM_FEEDINGS; i++) {
         feedCheck[i] = true;   
     }
-    return feedCheck;
 }
 

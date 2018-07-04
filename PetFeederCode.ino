@@ -17,7 +17,7 @@ const int NUM_FEEDINGS = 2;
 const int DISPLAY_DELAY = 2000;
 String initialTime;
 String * feedTimes;
-bool * feedCheck;
+bool feedCheck[NUM_FEEDINGS];
 
 void setup() {
     Serial.begin(9600);
@@ -26,7 +26,7 @@ void setup() {
     initialTime = setInitialTime();
     feedTimes = getFeedTimes();
     verifyFeedTimes(feedTimes);
-    feedCheck = feedCheckSetup();
+    feedCheckSetup();
 }
 
 void loop() {
@@ -36,10 +36,11 @@ void loop() {
                 feedFood(i);
             }
             else {
-                Serial.println("YOU'RE CAT HAS ALREADY BEEN FED!");
+                Serial.println("YOUR CAT HAS ALREADY BEEN FED!");
             }
         }
     }
-    Serial.println(getCurrentTime());
-    delay(1000);
+    if (getCurrentTime() == "00:00") {
+        feedCheckSetup();
+    }
 }
