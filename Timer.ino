@@ -35,14 +35,16 @@ String * getFeedTimes() {
 
 
 // user enters initial time to IR remote. time must be in 4 digit format. 
-String getInitialTime() {  
+String setInitialTime() {  
+    String initialTime;
     bool verifyTime;
+    
     do {
         lcd.clear();
         lcd.setCursor(0,0);
         lcd.print("Current Time?");
         
-        String initialTime = getTime();
+        initialTime = getTime();
         
         lcd.setCursor(0,1);
         lcd.print(initialTime);
@@ -50,6 +52,12 @@ String getInitialTime() {
         
         verifyTime = isValidTime(initialTime);
     } while (!verifyTime);
+
+    // convert string initial time to integers. input time integers into time library function - setTime()
+    int hourTime = initialTime.substring(0,2).toInt();
+    int minuteTime = initialTime.substring(3,5).toInt();
+    setTime(hourTime,minuteTime,0,7,4,2018);
+
     return initialTime;
 }
 
@@ -65,6 +73,14 @@ void verifyFeedTimes(String * feedTimes) {
 }
 
 String getCurrentTime() {
-    return "0";
+    time_t t = now();
+    String hourCurrentTime = String(hour(t));
+    String minuteCurrentTime = String(minute(t));
+    int lengthMinute = minuteCurrentTime.length();
+    if (lengthMinute < 2) {
+        minuteCurrentTime = "0" + minuteCurrentTime;
+    }
+    String currentTime = hourCurrentTime + ":" + minuteCurrentTime;
+    return currentTime;
 }
 
