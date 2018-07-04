@@ -84,3 +84,6 @@ String getCurrentTime() {
     return currentTime;
 }
 
+String resetNewDay() {
+}
+
