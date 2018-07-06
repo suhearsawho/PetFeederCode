@@ -35,11 +35,15 @@ void loop() {
             if (*(feedCheck + i) == true) {
                 feedFood(i);
             }
-            else {
-                Serial.println("YOUR CAT HAS ALREADY BEEN FED!");
-            }
         }
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Feeding");
+        lcd.setCursor(0,1);
+        lcd.print("Complete"); 
     }
+    
+
     if (getCurrentTime() == "00:00") {
         feedCheckSetup();
     }
