@@ -12,18 +12,19 @@
 #include <LiquidCrystal.h>
 
 LiquidCrystal lcd(12, 10, 5, 4, 3, 2);
-
-const int NUM_FEEDINGS = 2;         
+      
 const int DISPLAY_DELAY = 2000;
 String initialTime;
 String * feedTimes;
-bool feedCheck[NUM_FEEDINGS];
+bool * feedCheck;
 int numFeedings;
 
 void setup() {
     Serial.begin(9600);
     lcd.begin(16,2);
+    
     setupRemote();
+    
     initialTime = setInitialTime();
     numFeedings = setNumFeedings();
     feedTimes = getFeedTimes();
@@ -38,11 +39,14 @@ void loop() {
                 feedFood(i);
             }
         }
-        lcd.clear();
-        lcd.setCursor(0,0);
-        lcd.print("Feeding");
-        lcd.setCursor(0,1);
-        lcd.print("Complete"); 
+        if ( i == numFeedings - 1) {
+            lcd.clear();
+            lcd.setCursor(0,0);
+            lcd.print("Feeding");
+            lcd.setCursor(0,1);
+            lcd.print("Complete"); 
+            
+        }
     }
     
 

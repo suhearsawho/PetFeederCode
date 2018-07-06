@@ -13,6 +13,7 @@ String getTime() {
 }
 
 
+
 String * getFeedTimes() {
     String feedTimes[numFeedings];
     for (int i = 0; i < numFeedings; i++) {
@@ -23,15 +24,20 @@ String * getFeedTimes() {
             lcd.print("Feeding Time ");
             lcd.setCursor(14,0);
             lcd.print(String(i+1));
+            
             feedTimes[i] = getTime();
+            
             lcd.setCursor(0,1);
             lcd.print(feedTimes[i]);
             delay(DISPLAY_DELAY);
+    
             verifyTime = isValidTime(feedTimes[i]);
         } while (!verifyTime);
     }
     return feedTimes;
 }
+
+
 
 
 // user enters initial time to IR remote. time must be in 4 digit format. 
@@ -61,6 +67,37 @@ String setInitialTime() {
     return initialTime;
 }
 
+
+
+bool isValidTime(String inputTime) {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Confirm?");
+    lcd.setCursor(0,1);
+    lcd.print(inputTime);
+
+    // Only accept Yes or No buttons
+    do {
+        String verifyInput = readRemoteButton();
+    
+        Serial.println(verifyInput);
+        if (verifyInput == REMOTE_FORWARD) {
+            lcd.setCursor(6,1);
+            lcd.print("Yes");
+            delay(DISPLAY_DELAY);
+            return true;
+        } else if (verifyInput == REMOTE_REVERSE) {
+            lcd.setCursor(6,1);
+            lcd.print("No");
+            delay(DISPLAY_DELAY);
+            return false;
+        }
+    } while (true);
+}
+
+
+
+
 void verifyFeedTimes(String * feedTimes) {
     lcd.clear();
     lcd.setCursor(0,0);
@@ -71,6 +108,8 @@ void verifyFeedTimes(String * feedTimes) {
     }
     delay(DISPLAY_DELAY);
 }
+
+
 
 String getCurrentTime() {
     time_t t = now();

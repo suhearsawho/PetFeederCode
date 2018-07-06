@@ -43,6 +43,7 @@ void feedFood(int feedingNumber){
 
 void feedCheckSetup(){
     // TRUE = Pet has not been fed
+    bool feedCheck[numFeedings];
     for (int i = 0; i < numFeedings; i++) {
         feedCheck[i] = true;   
     }

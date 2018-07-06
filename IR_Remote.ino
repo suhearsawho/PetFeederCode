@@ -75,30 +75,4 @@ String convertButtonValue(String buttonHEX) {
     }
 }
 
-bool isValidTime(String inputTime) {
-    lcd.clear();
-    lcd.setCursor(0,0);
-    lcd.print("Confirm?");
-    lcd.setCursor(0,1);
-    lcd.print(inputTime);
-
-    // Only accept Yes or No buttons
-    do {
-        String verifyInput = readRemoteButton();
-    
-        Serial.println(verifyInput);
-        if (verifyInput == REMOTE_FORWARD) {
-            lcd.setCursor(6,1);
-            lcd.print("Yes");
-            delay(DISPLAY_DELAY);
-            return true;
-        } else if (verifyInput == REMOTE_REVERSE) {
-            lcd.setCursor(6,1);
-            lcd.print("No");
-            delay(DISPLAY_DELAY);
-            return false;
-        }
-    } while (true);
-}
-
 
