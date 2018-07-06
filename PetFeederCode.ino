@@ -39,13 +39,13 @@ void loop() {
                 feedFood(i);
             }
         }
+        
         if ( i == numFeedings - 1) {
             lcd.clear();
             lcd.setCursor(0,0);
-            lcd.print("Feeding");
+            lcd.print("Feedings");
             lcd.setCursor(0,1);
             lcd.print("Complete"); 
-            
         }
     }
     

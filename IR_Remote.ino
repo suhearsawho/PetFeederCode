@@ -2,6 +2,7 @@ int RECV_PIN = 11;
 IRrecv irrecv(RECV_PIN);
 decode_results results;
 
+// these values will vary depending on the type of remote being used. 
 const String REMOTE_POWER = "FFA25D";
 const String REMOTE_VOL_UP = "FF629D";
 const String REMOTE_STOP = "FFE21D";
@@ -49,6 +50,8 @@ String readRemoteButton() {
     return input; 
 }
 
+
+//convert the HEX code from the remote into a string value
 String convertButtonValue(String buttonHEX) {
     if (buttonHEX == REMOTE_0) {
         return "0";

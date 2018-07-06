@@ -1,3 +1,8 @@
+// ALL TIME VALUES MUST BE ENTERED IN 4 UNITS. HH, MM. 
+// VALUES ARE DISPLAYED IN 24 HOUR UNITS 
+
+
+// foundation for functions that involve getting time values from user
 String getTime() {
     String inputTime;
     for (int i = 0; i < 4; i++) {
@@ -13,7 +18,7 @@ String getTime() {
 }
 
 
-
+// user inputs the various feeding times for pet
 String * getFeedTimes() {
     String feedTimes[numFeedings];
     for (int i = 0; i < numFeedings; i++) {
@@ -36,8 +41,6 @@ String * getFeedTimes() {
     }
     return feedTimes;
 }
-
-
 
 
 // user enters initial time to IR remote. time must be in 4 digit format. 
@@ -68,7 +71,6 @@ String setInitialTime() {
 }
 
 
-
 bool isValidTime(String inputTime) {
     lcd.clear();
     lcd.setCursor(0,0);
@@ -96,8 +98,6 @@ bool isValidTime(String inputTime) {
 }
 
 
-
-
 void verifyFeedTimes(String * feedTimes) {
     lcd.clear();
     lcd.setCursor(0,0);
@@ -110,21 +110,20 @@ void verifyFeedTimes(String * feedTimes) {
 }
 
 
-
 String getCurrentTime() {
     time_t t = now();
     String hourCurrentTime = String(hour(t));
     String minuteCurrentTime = String(minute(t));
-    
-    int lengthMinute = minuteCurrentTime.length();
-    if (lengthMinute < 2) {
-        minuteCurrentTime = "0" + minuteCurrentTime;
-    }
+
     int lengthHour = hourCurrentTime.length();
     if (lengthHour < 2) {
         hourCurrentTime = "0" + hourCurrentTime;
     }
-    
+    int lengthMinute = minuteCurrentTime.length();
+    if (lengthMinute < 2) {
+        minuteCurrentTime = "0" + minuteCurrentTime;
+    }
+
     String currentTime = hourCurrentTime + ":" + minuteCurrentTime;
     return currentTime;
 }

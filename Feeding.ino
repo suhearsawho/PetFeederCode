@@ -1,8 +1,9 @@
 Servo feedServo;
 
-const int feedServoOpen = 45; 
-const int feedServoClose = 0;
+const int feedServoOpen = 45;   // in terms of degrees
+const int feedServoClose = 0;   // in terms of degrees
 const int feedingIntervalLength = 40000; //amount of time that food takes to clear from machine.
+
 
 int setNumFeedings() {
     lcd.clear();
@@ -10,13 +11,12 @@ int setNumFeedings() {
     lcd.print("# Feed Times?");
 
     String numFeedingsString = convertButtonValue(readRemoteButton());
-
     isValidTime(numFeedingsString);
-
     int numFeedings = numFeedingsString.toInt();
     
     return numFeedings;
 }
+
 
 void feedFood(int feedingNumber){
     lcd.clear();
