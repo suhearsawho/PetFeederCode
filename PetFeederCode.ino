@@ -13,24 +13,26 @@
 
 LiquidCrystal lcd(12, 10, 5, 4, 3, 2);
 
-const int NUM_FEEDINGS = 2;
+const int NUM_FEEDINGS = 2;         
 const int DISPLAY_DELAY = 2000;
 String initialTime;
 String * feedTimes;
 bool feedCheck[NUM_FEEDINGS];
+int numFeedings;
 
 void setup() {
     Serial.begin(9600);
     lcd.begin(16,2);
     setupRemote();
     initialTime = setInitialTime();
+    numFeedings = setNumFeedings();
     feedTimes = getFeedTimes();
     verifyFeedTimes(feedTimes);
     feedCheckSetup();
 }
 
 void loop() {
-    for (int i = 0; i < NUM_FEEDINGS; i++) {
+    for (int i = 0; i < numFeedings; i++) {
         if (*(feedTimes + i) == getCurrentTime()) {
             if (*(feedCheck + i) == true) {
                 feedFood(i);

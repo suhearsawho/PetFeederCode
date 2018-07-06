@@ -78,7 +78,7 @@ String convertButtonValue(String buttonHEX) {
 bool isValidTime(String inputTime) {
     lcd.clear();
     lcd.setCursor(0,0);
-    lcd.print("Confirm Time?");
+    lcd.print("Confirm?");
     lcd.setCursor(0,1);
     lcd.print(inputTime);
 

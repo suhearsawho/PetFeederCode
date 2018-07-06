@@ -4,6 +4,19 @@ const int feedServoOpen = 45;
 const int feedServoClose = 0;
 const int feedingIntervalLength = 40000; //amount of time that food takes to clear from machine.
 
+int setNumFeedings() {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("# Feed Times?");
+
+    String numFeedingsString = convertButtonValue(readRemoteButton());
+
+    isValidTime(numFeedingsString);
+
+    int numFeedings = numFeedingsString.toInt();
+    
+    return numFeedings;
+}
 
 void feedFood(int feedingNumber){
     lcd.clear();
@@ -18,7 +31,7 @@ void feedFood(int feedingNumber){
     
     feedCheck[feedingNumber] = false;
 
-    if (feedingNumber < NUM_FEEDINGS - 1) {
+    if (feedingNumber < numFeedings - 1) {
         lcd.clear();
         lcd.setCursor(0,0);
         lcd.print("Next Feed Time");
@@ -30,7 +43,7 @@ void feedFood(int feedingNumber){
 
 void feedCheckSetup(){
     // TRUE = Pet has not been fed
-    for (int i = 0; i < NUM_FEEDINGS; i++) {
+    for (int i = 0; i < numFeedings; i++) {
         feedCheck[i] = true;   
     }
 }

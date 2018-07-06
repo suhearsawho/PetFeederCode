@@ -14,8 +14,8 @@ String getTime() {
 
 
 String * getFeedTimes() {
-    static String feedTimes[NUM_FEEDINGS];
-    for (int i = 0; i < NUM_FEEDINGS; i++) {
+    String feedTimes[numFeedings];
+    for (int i = 0; i < numFeedings; i++) {
         bool verifyTime;
         do {
             lcd.clear();
@@ -65,7 +65,7 @@ void verifyFeedTimes(String * feedTimes) {
     lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("Feed Times at:");
-    for (int i = 0; i < NUM_FEEDINGS; i++) {
+    for (int i = 0; i < numFeedings; i++) {
         lcd.setCursor(i*6,1);
         lcd.print(feedTimes[i]);
     }
